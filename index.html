@@ -19,8 +19,8 @@
                 <img alt="functional.js" src="http://functionaljs.com/css/images/logo@2x.png" />
                 <h1>functional.js</h1>
                 <p>
-                    <a href="http://functionaljs.com" target="_blank">Documentation</a> /
-                    <a href="https://github.com/leecrossley/functional-js" target="_blank">GitHub</a>
+                    <a href="http://functionaljs.com" target="_blank">docs</a> /
+                    <a href="https://github.com/leecrossley/functional-js" target="_blank">source</a>
                 </p>
                 <p><small>
                     <a href="https://twitter.com/lee_crossley" target="_blank">@lee_crossley</a> /
@@ -29,12 +29,184 @@
             </section>
 
             <section>
-                <h2>Code</h2>
-<pre><code data-trim contenteditable>
-var thing = function () {
-    // Stuff
+                <h3>Straight in...</h3>
+                <pre><code spellcheck="false" data-trim contenteditable>
+var enabledProducts = [];
+
+for (var i = 0; i < products.length; i++) {
+    if (products[i].enabled) {
+        enabledProducts.push(products[i]);
+    }
+}
+                </code></pre>
+
+                <h4>With fjs</h4>
+
+                <pre><code spellcheck="false" data-trim contenteditable>
+var enabledProducts = fjs.select(function(item) {
+    return item.enabled;
+}, products);
+                </code></pre>
+
+                <p><small>
+                    <a href="http://functionaljs.com/collections/select-filter/" target="_blank">view in docs</a>
+                </small></p>
+
+            </section>
+
+            <section>
+                <h3>Skinning the cat</h3>
+
+                <pre><code spellcheck="false" data-trim contenteditable>
+var enabledProducts = fjs.select(function(item) {
+    return item.enabled;
+}, products);
+                </code></pre>
+
+                <h4>Currying for reuse</h4>
+
+                <pre><code spellcheck="false" data-trim contenteditable>
+var enabled = function (item) {
+    return item.enabled;
 };
-</code></pre>
+
+var selectEnabled = fjs.select(enabled);
+
+selectEnabled(products);
+                </code></pre>
+
+                <p><small>
+                    <a href="http://functionaljs.com/collections/select-filter/" target="_blank">view in docs</a>
+                </small></p>
+
+            </section>
+
+            <section>
+                <h3>More techniques</h3>
+                <h4>Lambda expressions</h4>
+
+                <pre><code spellcheck="false" data-trim contenteditable>
+var enabledProducts = fjs.select("p => p.enabled", products);
+                </code></pre>
+
+                <h4>Curried lambda expression</h4>
+
+                <pre><code spellcheck="false" data-trim contenteditable>
+var selectEnabled = fjs.select("p => p.enabled");
+
+selectEnabled(products);
+                </code></pre>
+
+                <p><small>
+                    <a href="http://functionaljs.com/basics/lambda/" target="_blank">view in docs</a>
+                </small></p>
+
+            </section>
+
+            <section>
+                <h3>fjs functions for collections</h3>
+                <p>each, map, reduce, fold, apply, every, any, select, pluck, toArray, first, last, best, partition, group, while</p>
+
+                <p><small>
+                    <a href="http://functionaljs.com/collections/each/" target="_blank">view in docs</a>
+                </small></p>
+            </section>
+
+            <section>
+                <h3>Fold product prices</h3>
+
+                <pre><code spellcheck="false" data-trim contenteditable>
+var add = function (a, b) {
+    return a + b;
+};
+
+var sum = fjs.fold(add, 0);
+
+sum(prices);
+                </code></pre>
+
+                <pre><code spellcheck="false" data-trim contenteditable>
+fjs.fold("a, b => a + b", 0, prices);
+                </code></pre>
+
+                <p><small>
+                    <a href="http://functionaljs.com/collections/fold/" target="_blank">view in docs</a>
+                </small></p>
+            </section>
+
+            <section>
+                <h3>From the DOM</h3>
+
+                <pre><code spellcheck="false" data-trim contenteditable>
+var $ = document.querySelectorAll.bind(document);
+
+var prices = [].slice.call($(".price"));
+
+fjs.fold("a, b => a + b", 0, prices);
+                </code></pre>
+
+                <p><small>
+                    <a href="http://functionaljs.com/collections/fold/" target="_blank">view in docs</a>
+                </small></p>
+            </section>
+
+            <section>
+                <h3>Roll your own</h3>
+
+                <pre><code spellcheck="false" data-trim contenteditable>
+var converter = fjs.curry(function(rate, symbol, input) {
+    var output = input * rate;
+    return symbol + output.toFixed(2);
+});
+
+var poundsToUSD = converter(1.52, "$");
+var poundsToEUR = converter(1.27, "€");
+
+poundsToUSD(100);
+poundsToEUR(50);
+                </code></pre>
+
+                <p><small>
+                    <a href="http://functionaljs.com/basics/curry/" target="_blank">view in docs</a>
+                </small></p>
+            </section>
+
+            <section>
+                <h3>Why fjs?</h3>
+                <ul>
+                    <li>Functional from the ground up but still JS</li>
+                    <li>Consistent implementation</li>
+                    <li>Client (cross browser, mobile) / Server (nodejs)</li>
+                    <li>&lt; 2kB minified and gzipped</li>
+                    <li>Best curry you'll get anywhere</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>There's much, much more</h3>
+
+                <ul>
+                    <li>Multiple function composition with fjs.compose</li>
+                    <li>Extending function arity beyond the expected length</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Try it</h3>
+                <ul>
+                    <li>npm install functional.js --save</li>
+                    <li>bower install functional.js</li>
+                    <li>http://bit.ly/funcmin</li>
+                    <li>here (open your dev console)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Get involved</h3>
+                <ul>
+                    <li><a href="https://github.com/leecrossley/functional-js" target="_blank">Open source</a></li>
+                    <li><a href="https://github.com/leecrossley/functionaljs-docs" target="_blank">Open docs</a></li>
+                </ul>
             </section>
         </div>
     </div>
@@ -43,6 +215,7 @@ var thing = function () {
 
     <script src="js/head.js"></script>
     <script src="js/reveal.js"></script>
+    <script src="js/functional.js"></script>
 
     <script>
         Reveal.initialize({
@@ -52,10 +225,13 @@ var thing = function () {
             center: true,
             transition: "none",
             dependencies: [
-                { src: "js/marked.js" },
-                { src: "js/markdown.js" },
-                { src: "js/highlight.js", async: true,
-                    callback: function() { hljs.initHighlightingOnLoad(); } }
+                {
+                    src: "js/highlight.js",
+                    async: true,
+                    callback: function() {
+                        hljs.initHighlightingOnLoad();
+                    }
+                }
             ]
         });
     </script>
