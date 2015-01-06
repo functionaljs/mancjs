@@ -256,9 +256,9 @@ body {
 body > a.link {
     margin: 0;
     padding: 0;
-    position: absolute;
-    right: 1.5em;
-    bottom: 1.5em;
+    position: fixed;
+    left: 30px;
+    bottom: 30px;
     height: 56px;
     width: 65px;
     -webkit-background-size: 65px 56px;
@@ -308,19 +308,19 @@ body > a.link {
 }
 
 .reveal .controls div.navigate-left.enabled:hover {
-    border-right-color: #0000f1;
+    border-right-color: #50b6a9;
 }
 
 .reveal .controls div.navigate-right.enabled:hover {
-    border-left-color: #0000f1;
+    border-left-color: #50b6a9;
 }
 
 .reveal .controls div.navigate-up.enabled:hover {
-    border-bottom-color: #0000f1;
+    border-bottom-color: #50b6a9;
 }
 
 .reveal .controls div.navigate-down.enabled:hover {
-    border-top-color: #0000f1;
+    border-top-color: #50b6a9;
 }
 
 /*********************************************
